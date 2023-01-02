@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -32,10 +33,12 @@ public class Circulo extends D2{
     @Override
     public void desenhar(Graphics g){
         super.desenhar(g);
-        g.setColor(super.cor);
-        g.drawOval(super.x, super.y, raio*2, raio*2);
+
         g.setColor(super.corInterna);
         g.fillOval(super.x, super.y, raio*2, raio*2);
+        g.setColor(super.cor);
+        g.drawOval(super.x, super.y, raio*2, raio*2);
+            
     }
 
 }

@@ -5,16 +5,9 @@
 package src.main.java.com.mycompany.paint;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Random;
 import javax.swing.JColorChooser;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -25,7 +18,7 @@ public class NewJFrame extends javax.swing.JFrame {
     Color corAtual1;
     Color corAtual2;
     
-    enum TipoFigura {tpPonto,tpRetangulo, tpReta, tpCirculo, tpPoligono, tpSpray, tpBorracha, tpCilindro};
+    enum TipoFigura {tpPonto,tpRetangulo, tpReta, tpCirculo, tpPoligono, tpSpray, tpBorracha, tpCilindro, tpPiramide};
     
     Ponto p = new Ponto();
     Retangulo r = new Retangulo();
@@ -33,7 +26,9 @@ public class NewJFrame extends javax.swing.JFrame {
     Circulo circ = new Circulo();
     Poligono pol = new Poligono();
     Spray sp = new Spray();
+    Borracha bo = new Borracha();
     Cilindro cilin = new Cilindro();
+    Piramide piram = new Piramide();
     private TipoFigura tipoFigura = TipoFigura.tpPonto;
     ArrayList<Integer> a = new ArrayList();
     ArrayList<Integer> b = new ArrayList();
@@ -74,6 +69,9 @@ public class NewJFrame extends javax.swing.JFrame {
         btnPoligono = new javax.swing.JButton();
         btnSpray = new javax.swing.JButton();
         btnBorracha = new javax.swing.JButton();
+        cbVolume = new java.awt.Checkbox();
+        BtnCilin = new javax.swing.JButton();
+        BtnPiram = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,7 +124,7 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         jpPaintLayout.setVerticalGroup(
             jpPaintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 407, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
 
         BtnPonto.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
@@ -138,7 +136,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        cbArea.setLabel("área");
+        cbArea.setLabel("Área");
 
         jpCor1.setBackground(new java.awt.Color(0, 0, 0));
         jpCor1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -209,7 +207,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        cbComprimento.setLabel("comprimento");
+        cbComprimento.setLabel("Comprimento");
 
         btnCirculo.setText("Circulo");
         btnCirculo.setContentAreaFilled(false);
@@ -277,6 +275,34 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        cbVolume.setLabel("Volume");
+
+        BtnCilin.setBackground(new java.awt.Color(204, 204, 204));
+        BtnCilin.setText("Cilindro");
+        BtnCilin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnCilinMouseClicked(evt);
+            }
+        });
+        BtnCilin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCilinActionPerformed(evt);
+            }
+        });
+
+        BtnPiram.setBackground(new java.awt.Color(204, 204, 204));
+        BtnPiram.setText("Piramide");
+        BtnPiram.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnPiramMouseClicked(evt);
+            }
+        });
+        BtnPiram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPiramActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -284,7 +310,26 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbPerimetro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                        .addComponent(BtnCor1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpCor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnCor2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpCor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(186, 186, 186)
+                                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BtnPonto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -298,60 +343,46 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSpray)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBorracha))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnBorracha)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnCilin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbPerimetro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnCor1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jpCor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnCor2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jpCor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 34, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jpPaint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(BtnPiram)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jpPaint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbPerimetro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbPerimetro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BtnCor1)
                     .addComponent(jpCor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnCor2)
                     .addComponent(jpCor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnPonto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnRet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnPiram, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(BtnCilin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addComponent(btnBorracha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSpray, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPoligono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCirculo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(BtnRet)
-                                .addComponent(btnReta)
-                                .addComponent(btnCirculo))
-                            .addComponent(BtnPonto))
-                        .addComponent(btnSpray, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBorracha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnPoligono))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpPaint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpPaint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         BtnCor1.getAccessibleContext().setAccessibleName("cor 1");
@@ -366,7 +397,9 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -397,6 +430,22 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_panelMousePressed
 
+    private void BtnPiramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPiramActionPerformed
+
+    }//GEN-LAST:event_BtnPiramActionPerformed
+
+    private void BtnPiramMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnPiramMouseClicked
+        tipoFigura = TipoFigura.tpPiramide;
+    }//GEN-LAST:event_BtnPiramMouseClicked
+
+    private void BtnCilinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCilinActionPerformed
+
+    }//GEN-LAST:event_BtnCilinActionPerformed
+
+    private void BtnCilinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCilinMouseClicked
+        tipoFigura = TipoFigura.tpCilindro;
+    }//GEN-LAST:event_BtnCilinMouseClicked
+
     private void btnBorrachaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrachaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBorrachaActionPerformed
@@ -422,7 +471,6 @@ public class NewJFrame extends javax.swing.JFrame {
         if (evt.getKeyChar()=='a'){
             pol.desenhar(jpPaint.getGraphics());
         }
-
     }//GEN-LAST:event_btnPoligonoKeyPressed
 
     private void btnPoligonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoligonoActionPerformed
@@ -503,11 +551,31 @@ public class NewJFrame extends javax.swing.JFrame {
             circ.corInterna = corAtual2;
             circ.raio = (evt.getX()-circ.x)/2;
             circ.desenhar(jpPaint.getGraphics());
-            System.out.println(circ.x +" "+ circ.X2);
-            System.out.println(circ.raio);
+
         }
         if(tipoFigura == TipoFigura.tpCilindro){
- 
+            cilin.showVolume = cbVolume.getState();
+
+            cilin.X2 = evt.getX();
+            cilin.Y2 = evt.getY();
+
+            cilin.cor = corAtual1;
+            cilin.corInterna = corAtual2;
+
+            cilin.raio = (evt.getX()-cilin.x)/2;
+
+            cilin.desenhar(jpPaint.getGraphics());
+        }
+        if(tipoFigura == TipoFigura.tpPiramide){
+            piram.showVolume = cbVolume.getState();
+
+            piram.X2 = evt.getX();
+            piram.Y2 = evt.getY();
+
+            piram.cor = corAtual1;
+            piram.corInterna = corAtual2;
+
+            piram.desenhar(jpPaint.getGraphics());
         }
         a.clear();
         b.clear();
@@ -515,6 +583,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jpPaintMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpPaintMousePressed
         // TODO add your handling code here:
+
         if (tipoFigura == TipoFigura.tpPonto){
             p.x = evt.getX();
             p.y = evt.getY();
@@ -537,18 +606,19 @@ public class NewJFrame extends javax.swing.JFrame {
         if (tipoFigura == TipoFigura.tpPoligono){
             pol.cor = corAtual1;
             pol.corInterna = corAtual2;
-            pol.x = evt.getX();
-            pol.y = evt.getY();
-
-            pol.desenhar(jpPaint.getGraphics());
-            if( pol.pontos.size() >= 3 && evt.getButton() == MouseEvent.BUTTON2){
-                pol.pegarPontos(jpPaint.getGraphics());
-                pol.limparPontos();
+            pol.adicionarPontos(evt.getX(), evt.getY());
+            
+            if( pol.listaPontos.size() >= 3 && evt.getButton() == MouseEvent.BUTTON2){
+                pol.desenhar(jpPaint.getGraphics());
             }
-        if(tipoFigura == TipoFigura.tpCilindro){
-                       
         }
-
+        if(tipoFigura == TipoFigura.tpCilindro){
+            cilin.x = evt.getX();
+            cilin.y = evt.getY();
+        }
+        if(tipoFigura == TipoFigura.tpPiramide){
+            piram.x = evt.getX();
+            piram.y = evt.getY();
         }
         /*if (tipoFigura == TipoFigura.tpSpray){
             sp.G = jpPaint.getGraphics();
@@ -560,23 +630,14 @@ public class NewJFrame extends javax.swing.JFrame {
             sp.desenhar();
 
         }*/
-
     }//GEN-LAST:event_jpPaintMousePressed
 
     private void jpPaintMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpPaintMouseDragged
         if(tipoFigura == TipoFigura.tpBorracha){
-            a.add(evt.getX());
-            b.add(evt.getY());
-            sp.cor = jpPaint.getBackground();
-
-            for(int i =0 ; i< a.size()-1; i++){
-                sp.G = jpPaint.getGraphics();
-                sp.min_valX = evt.getX()-20;
-                sp.max_valX = evt.getX()+20;
-                sp.min_valY = evt.getY()-20;
-                sp.max_valY = evt.getY()+20;
-                sp.desenhar();
-            }
+            bo.x = evt.getX();
+            bo.y = evt.getY();
+            bo.cor = jpPaint.getBackground();
+            bo.desenhar(jpPaint.getGraphics());
         }
         if(tipoFigura == TipoFigura.tpSpray){
             a.add(evt.getX());
@@ -593,6 +654,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jpPaintMouseDragged
+    
+    
     
     /**
      * @param args the command line arguments
@@ -630,8 +693,10 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnCilin;
     private javax.swing.JButton BtnCor1;
     private javax.swing.JButton BtnCor2;
+    private javax.swing.JButton BtnPiram;
     private javax.swing.JButton BtnPonto;
     private javax.swing.JButton BtnRet;
     private javax.swing.JButton btnBorracha;
@@ -643,6 +708,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private java.awt.Checkbox cbArea;
     private java.awt.Checkbox cbComprimento;
     private java.awt.Checkbox cbPerimetro;
+    private java.awt.Checkbox cbVolume;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpCor1;

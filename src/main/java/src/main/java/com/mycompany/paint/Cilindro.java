@@ -1,17 +1,46 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package src.main.java.com.mycompany.paint;
-
-import java.awt.Color;
 import java.awt.Graphics;
 
-/**
- *
- * @author 13045481639
+/*
+ * @author guilherme_rodrigues
  */
-public class Cilindro {
 
+public class Cilindro extends D3 {
+    public int raio;
+    public int X2;
+    public int Y2;
     
+    Cilindro(){}
+    
+    @Override
+    public float volume(){
+        return altura * 2 * 3.14f * raio;
+    }
+    
+    @Override
+    public void desenhar(Graphics g){
+        altura = Y2 - super.y;
+        int base = X2 - super.x;
+        super.desenhar(g);    
+        
+        //desenho do retangulo
+        g.setColor(super.corInterna);
+        g.fillRect(super.x, super.y, base, altura);
+        g.setColor(cor);
+        g.drawRect(super.x, super.y, base, altura);  
+        
+        //desenho do topo
+        g.setColor(super.corInterna);
+        g.fillOval(super.x, super.y - (altura)/10, raio*2, 2 * (altura)/10);
+        g.setColor(super.cor);
+        g.drawOval(super.x, super.y - (altura)/10, raio*2, 2 * (altura)/10);
+        
+        
+        //desenho da base
+        g.setColor(super.corInterna);
+        g.fillOval(super.x, super.y + altura - altura/10, raio*2, 2 * (altura)/10);
+        g.setColor(super.cor);
+        g.drawOval(super.x, super.y + altura - altura/10, raio*2, 2 * (altura)/10);
+        
+    }    
 }

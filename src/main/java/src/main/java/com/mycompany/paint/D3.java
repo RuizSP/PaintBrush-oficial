@@ -1,13 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.paint;
+package src.main.java.com.mycompany.paint;
 
 /**
  *
- * @author 48303706888
+ * @author guilhermerodrigues
  */
-public class D3 {
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+abstract public class D3 extends Ponto {
+    public Color corInterna;
+    public boolean showVolume = false;
+    public int altura;
     
+abstract public float volume();
+
+@Override
+    public void desenhar(Graphics g) {
+        if (showVolume) {
+            g.setColor(cor);
+            g.drawString(Float.toString(volume()), x - 10, y - 10);
+       }      
+    }
 }
