@@ -15,7 +15,7 @@ public class Borracha extends Ponto{
     @Override 
         public void desenhar(Graphics g) {
               g.setColor(cor);
+              g.drawRect(x - 30, y - 30, 60, 60);
               g.fillRect(x - 30, y - 30, 60, 60);
-              g.drawRect(x - 30, y - 30, 60, 60);              
         }
 }        
