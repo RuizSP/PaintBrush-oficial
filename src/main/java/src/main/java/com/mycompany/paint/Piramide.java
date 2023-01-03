@@ -22,6 +22,21 @@ public class Piramide extends D3 {
         return altura * base * largura / 3;
     }
     
+    public float areaQuadrado(float lado){
+        return lado * lado;
+    }
+    
+    public  float areaTriangulo(float base){
+        return (base + altura)/2;
+    }
+    
+    @Override
+    public float area(){
+        int base = X2 - super.x;
+        
+        return areaQuadrado(base) + 4 * areaTriangulo(base);
+    }
+    
     @Override
     public void desenhar(Graphics g){
         altura = Y2 - super.y;

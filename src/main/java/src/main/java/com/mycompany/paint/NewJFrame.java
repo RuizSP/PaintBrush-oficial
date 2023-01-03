@@ -554,6 +554,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         }
         if(tipoFigura == TipoFigura.tpCilindro){
+            cilin.showArea = cbArea.getState();
             cilin.showVolume = cbVolume.getState();
 
             cilin.X2 = evt.getX();
@@ -567,6 +568,7 @@ public class NewJFrame extends javax.swing.JFrame {
             cilin.desenhar(jpPaint.getGraphics());
         }
         if(tipoFigura == TipoFigura.tpPiramide){
+            piram.showArea = cbArea.getState();
             piram.showVolume = cbVolume.getState();
 
             piram.X2 = evt.getX();

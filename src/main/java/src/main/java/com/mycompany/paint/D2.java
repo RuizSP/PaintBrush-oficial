@@ -26,11 +26,11 @@ abstract public class D2 extends Ponto {
     public void desenhar(Graphics g) {
         if (showArea) {
             g.setColor(cor);
-            g.drawString(Float.toString(area()), x-10, y-10);
+            g.drawString("Área: " + Float.toString(area()), x-10, y-10);
        }
         if(showPerimetro){
             g.setColor(cor);
-            g.drawString(Double.toString(perimetro()), x-20, y-20);
+            g.drawString("Perímetro: " + Double.toString(perimetro()), x-20, y-20);
         }
     }
     

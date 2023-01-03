@@ -37,10 +37,11 @@ public class Poligono extends Ponto{
             pontosY[i] = listaPontos.get(i).y;
         }
         for(int i =0;i<listaPontos.size();i++){
-            g.setColor(cor);
-            g.drawPolygon(pontosX, pontosY,listaPontos.size());
             g.setColor(corInterna);
             g.fillPolygon(pontosX, pontosY,listaPontos.size());
+            g.setColor(cor);
+            g.drawPolygon(pontosX, pontosY,listaPontos.size());
+            
             
             
         }

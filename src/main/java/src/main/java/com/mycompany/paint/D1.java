@@ -28,7 +28,7 @@ public class D1 extends Ponto {
         g.setColor(super.cor);
         g.drawLine(super.x, super.y, X1, Y1);
         if(this.showComprimento)
-            g.drawString(Double.toString(comprimento()), x, y);
+            g.drawString("Comprimento: " + Double.toString(comprimento()), x, y);
     }
     public double comprimento(){
         int a = (this.X1 - super.x)^2;

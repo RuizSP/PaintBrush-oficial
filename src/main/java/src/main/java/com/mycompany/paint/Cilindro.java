@@ -12,6 +12,20 @@ public class Cilindro extends D3 {
     
     Cilindro(){}
     
+    public float areaCirculo(){
+        return 3.14f * raio * raio;
+    }
+    
+    public float perimetroCirculo(){
+        return 2 * 3.14f * raio;
+    }
+    
+    @Override
+    public float area(){
+        // Duas Areas de circulo mais uma area de um retangulo (perimetro do circulo * altura)
+        return 2 * areaCirculo() + perimetroCirculo() * altura;
+    }
+    
     @Override
     public float volume(){
         return altura * 2 * 3.14f * raio;
